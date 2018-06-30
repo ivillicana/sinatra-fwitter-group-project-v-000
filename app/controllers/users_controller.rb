@@ -10,7 +10,11 @@ class UsersController < ApplicationController
   end
 
   get '/signup' do
-    erb :'users/new'
+    if !Helpers.logged_in?(session)
+      erb :'users/new'
+    else
+      redirect '/tweets'
+    end
   end
 
   post '/signup' do
