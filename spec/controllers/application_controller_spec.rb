@@ -19,10 +19,10 @@ describe ApplicationController do
     end
 
     it 'signup directs user to twitter index' do
-      params = {
+      params = {:user => {
         :username => "skittles123",
         :email => "skittles@aol.com",
-        :password => "rainbows"
+        :password => "rainbows"}
       }
       post '/signup', params
       expect(last_response.location).to include("/tweets")
