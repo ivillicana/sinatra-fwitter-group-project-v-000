@@ -54,9 +54,12 @@ class TweetsController < ApplicationController
   post '/tweets/:id' do
     if Helpers.logged_in?(session)
       tweet = Tweet.find(params[:id])
-      tweet.content = params[:tweet][:content]
-      tweet.save
-      redirect "/tweets/#{tweet.id}"
+      if !params[:tweet][:content].empty?
+        tweet.content = params[:tweet][:content]
+        tweet.save
+        redirect "/tweets/#{tweet.id}"
+      else
+        redirect "/tweets/#{tweet.id}/edit"
     else
       redirect '/login'
     end
