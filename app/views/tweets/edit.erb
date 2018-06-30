@@ -14,7 +14,7 @@
     <h3>What would you like it to say?</h3>
 
     <form method="post" action='/tweets/<%= @tweet.id %>'>
-      <textarea name="tweet[content]" maxlength="250" rows="7" cols="50" required><%= @tweet.content %></textarea><br>
+      <textarea name="tweet[content]" id="content" maxlength="250" rows="7" cols="50" required><%= @tweet.content %></textarea><br>
       <input type="submit" value="Edit Tweet">
     </form>
   </div>
