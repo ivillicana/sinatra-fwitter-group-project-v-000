@@ -1,4 +1,74 @@
 class TweetsController < ApplicationController
 
+  get '/tweets/new' do
+    if Helpers.logged_in?(session)
+      erb :'tweets/new'
+    else
+      redirect '/login'
+    end
+  end
+
+  get '/tweets' do
+    if Helpers.logged_in?(session)
+      @user = Helpers.current_user(session)
+    end
+    erb :index
+  end
+
+  post '/tweets' do
+    if Helpers.logged_in?(session)
+      tweet = Tweet.create(params[:tweet])
+      tweet.user_id = session[:user_id]
+      tweet.save
+      redirect "/tweets/#{tweet.id}"
+    else
+      redirect '/login'
+    end
+  end
+
+  get '/tweets/:id' do
+    if Helpers.logged_in?(session)
+      @tweet = Tweet.find(params[:id])
+      erb :'tweets/show'
+    else
+      redirect '/login'
+    end
+  end
+
+  get '/tweets/:id/edit' do
+    if Helpers.logged_in?(session)
+      @tweet = Tweet.find(params[:id])
+      if @tweet.user == Helpers.current_user(session)
+        erb :'tweets/edit'
+      else
+        redirect '/'
+      end
+    else
+      redirect '/login'
+    end
+  end
+
+  post '/tweets/:id' do
+    if Helpers.logged_in?(session)
+      tweet = Tweet.find(params[:id])
+      tweet.content = params[:tweet][:content]
+      tweet.save
+      redirect "/tweets/#{tweet.id}"
+    else
+      redirect '/login'
+    end
+  end
+
+  post '/tweets/:id/delete' do
+    if Helpers.logged_in?(session)
+      tweet = Tweet.find(params[:id])
+      if tweet.user == Helpers.current_user(session)
+        tweet.destroy
+      end
+        redirect '/'
+    else
+      redirect '/login'
+    end
+  end
 
 end
