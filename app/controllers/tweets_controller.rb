@@ -24,6 +24,7 @@ class TweetsController < ApplicationController
         redirect "/tweets/#{tweet.id}"
       else
         redirect '/tweets/new'
+      end
     else
       redirect '/login'
     end
