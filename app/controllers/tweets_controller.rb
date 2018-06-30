@@ -17,10 +17,13 @@ class TweetsController < ApplicationController
 
   post '/tweets' do
     if Helpers.logged_in?(session)
-      tweet = Tweet.create(params[:tweet])
-      tweet.user_id = session[:user_id]
-      tweet.save
-      redirect "/tweets/#{tweet.id}"
+      if !params[:tweet][:content].empty?
+        tweet = Tweet.create(params[:tweet])
+        tweet.user_id = session[:user_id]
+        tweet.save
+        redirect "/tweets/#{tweet.id}"
+      else
+        redirect '/tweets/new'
     else
       redirect '/login'
     end
