@@ -75,7 +75,7 @@ class TweetsController < ApplicationController
       if tweet.user == Helpers.current_user(session)
         tweet.destroy
       end
-        redirect '/'
+        redirect '/tweets'
     else
       redirect '/login'
     end
