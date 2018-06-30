@@ -10,7 +10,7 @@
   <br></br>
 
 <!--  <% if @tweet.user == Helpers.current_user(session) %>-->
-    <p><a href='/tweets/<%= @tweet.id %>/edit'>Edit this tweet</a></p>
+    <p><a href='/tweets/<%= @tweet.id %>/edit'>Edit Tweet</a></p>
 
     <form method="post" action='/tweets/<%= @tweet.id %>/delete'>
       <input type="submit" id="Delete Tweet" value="Delete Tweet">
