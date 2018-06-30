@@ -9,13 +9,13 @@
   <p>Tweeted by: <%= @tweet.user.username %></p>
   <br></br>
 
-
+<!--  <% if @tweet.user == Helpers.current_user(session) %>-->
     <p><a href='/tweets/<%= @tweet.id %>/edit'>Edit this tweet</a></p>
 
     <form method="post" action='/tweets/<%= @tweet.id %>/delete'>
       <input type="submit" id="Delete Tweet" value="DELETE this Tweet">
     </form>
-
+<!--  <% end %> -->
 
 
 </div>
