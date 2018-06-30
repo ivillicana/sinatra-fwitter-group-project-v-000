@@ -1,12 +1,12 @@
 class UsersController < ApplicationController
 
   get '/users/:slug' do
-    if Helpers.logged_in?(session)
+    #if Helpers.logged_in?(session)
       @user = User.find_by_slug(params[:slug])
       erb :'users/show'
-    else
-      redirect '/'
-    end
+    #else
+    #  redirect '/'
+    #end
   end
 
   get '/signup' do
